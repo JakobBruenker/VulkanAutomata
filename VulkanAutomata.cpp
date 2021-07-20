@@ -15,6 +15,7 @@
 #include <string>
 
 bool 	valid 		=	1;	//	Break on error
+bool 	stop 		=	0;	//	Stop looping when user wants to exit
 bool 	output 		=	1;	//	?
 int 	loglevel 	=	1;	//	?
 
@@ -3474,6 +3475,10 @@ int main(void) {
 							for(int i = 0; i <  4; i++) 				{ ubi[i] = rand()%UINT32_MAX; }
 							for(int i = 0; i < 48; i++) 				{ ubv[i] = rand()%UINT32_MAX; } }
 
+						// Exit		ESC
+						if( xe.xbutton.button == 9 ) {
+							stop = true; }
+
 						SCR_save = (SCR_save > 600) ? 600 : SCR_save;
 						ov("Key", xe.xbutton.button); } } }
 
@@ -3909,7 +3914,7 @@ int main(void) {
 		if(loglevel != 0 && idx == 2) { loglevel = loglevel * -1; }
 
 		if(fps_report == current_sec) { fps_report--; }
-	} while (valid && (idx < TEST_CYCLES || TEST_CYCLES < 1));
+	} while (valid && !stop && (idx < TEST_CYCLES || TEST_CYCLES < 1));
 
 	  ///////////////////////////////////////////////
 	 /**/	hd("STAGE:", "EXIT APPLICATION");	/**/
