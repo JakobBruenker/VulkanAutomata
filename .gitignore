@@ -1,0 +1,8 @@
+*.o
+*.cpp.bk
+*.log
+vid
+out
+fbk
+gif
+app
