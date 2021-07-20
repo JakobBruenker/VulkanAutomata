@@ -444,15 +444,15 @@ void find_full_config(uint32_t name_pairs[4096][2]) {
 		name_pairs[i][0] = timestamp_save[i];
 		name_pairs[i][1] = timestamp_pair[i]; } }
 
-void reload_shader(uint32_t shader_id) {
-	std::cout << "Removing SPV...\n";
-	std::string rm_cmd = "rm './app/frag_automata0000.spv'";
-	std::cout << "Building shader...\n";
-	system(rm_cmd.c_str());
-	std::string shader_source 	= "'./LOAD/AUTO/auto_" + std::to_string(shader_id) + ".frag'";
-	std::string make_shader 	= "./glslc -O " + shader_source + " -o './app/frag_automata0000.spv'";
-	system(make_shader.c_str());
-	std::cout << "Building shader... Done!\n"; }
+/* void reload_shader(uint32_t shader_id) { */
+/* 	std::cout << "Removing SPV...\n"; */
+/* 	std::string rm_cmd = "rm './app/frag_automata0000.spv'"; */
+/* 	std::cout << "Building shader...\n"; */
+/* 	system(rm_cmd.c_str()); */
+/* 	std::string shader_source 	= "'./LOAD/AUTO/auto_" + std::to_string(shader_id) + ".frag'"; */
+/* 	std::string make_shader 	= "./glslc -O " + shader_source + " -o './app/frag_automata0000.spv'"; */
+/* 	system(make_shader.c_str()); */
+/* 	std::cout << "Building shader... Done!\n"; } */
 
 struct RGBA_16_UNORM_TXL {
 	uint16_t r;
@@ -661,7 +661,7 @@ int main(void) {
 	if(loglevel != 0) { loglevel = loglevel * -1; }
 
 //	Make local backup: Fragment Shader (automata)
-	std::string fbk_auto 	= "res/frag/frag_automata0000.frag";
+	std::string fbk_auto 	= "res/frag/" FRAG ".frag";
 	std::string cp_auto		= "cp '" + fbk_auto + "' 'fbk/auto_" + timestamp +".frag'";
 	system(cp_auto.c_str());
 
@@ -703,7 +703,7 @@ int main(void) {
 	const char* 	filepath_vert		[VERT_FLS] =
 		{	"./app/vert_TriQuad.spv" 					};
 	const char* 	filepath_frag		[FRAG_FLS] =
-		{	"./app/frag_automata0000.spv",
+		{	"./app/" FRAG ".spv",
 		 	"./app/ParamUpdate.spv"						};
 	const char* 	instance_extensions	[INST_EXS] =
 		{	"VK_KHR_surface", 
